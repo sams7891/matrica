@@ -123,8 +123,7 @@ public class Matricas {
 		JOptionPane.showMessageDialog(null, teksts, "Matrica", JOptionPane.PLAIN_MESSAGE);
 	}
 			
-	public static void saskaititMatricas() {
-		
+	public static int[] divuMatricuIzvele() {
 		String teksts = "", pagVert;
 		boolean korektaVertiba;
 		int izv1 = 0, izv2 = 0;
@@ -138,7 +137,7 @@ public class Matricas {
 				pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
 				
 				if(pagVert == null)
-					return;
+					return null;
 				
 				izv1 = Integer.parseInt(pagVert) - 1;
 				korektaVertiba = true;
@@ -158,6 +157,16 @@ public class Matricas {
 			}
 		}while(!korektaVertiba);
 		
+		int[] izvele = {izv1, izv2};
+		return izvele;
+	}
+	
+	public static void saskaititMatricas() {
+		
+		int[] izvele = divuMatricuIzvele();
+		
+		int izv1 = izvele[0], izv2 = izvele[1];
+		
 		MatricasObjekts matrica = new MatricasObjekts();
 		matrica.vertibas = matrica.Saskaitit(matricas.get(izv1).vertibas, matricas.get(izv1).rindas, matricas.get(izv1).kolonnas, matricas.get(izv2).vertibas, matricas.get(izv2).rindas, matricas.get(izv2).kolonnas);
 		matrica.kolonnas = matricas.get(izv1).rindas;
@@ -174,41 +183,12 @@ public class Matricas {
 	
 		public static void atnemtMatricas() {
 			
-			String teksts = "", pagVert;
-			boolean korektaVertiba;
-			int izv1 = 0, izv2 = 0;
+			int[] izvele = divuMatricuIzvele();
 			
-			for(int i = 0; i < matricas.size(); i++) {
-				teksts += ( i + 1 ) + " - Matrica ar rindu un kolonnu skaitu: " + matricas.get(i).rindas + "; " + matricas.get(i).kolonnas + "\n";
-			}
-			
-			do {
-				try {
-					pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
-					
-					if(pagVert == null)
-						return;
-					
-					izv1 = Integer.parseInt(pagVert) - 1;
-					korektaVertiba = true;
-				}catch(NumberFormatException e) {
-					korektaVertiba = false;
-				}
-			}while(!korektaVertiba);
-			
-			do {
-				try {
-					pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
-					
-					izv2 = Integer.parseInt(pagVert) - 1;
-					korektaVertiba = true;
-				}catch(NumberFormatException e) {
-					korektaVertiba = false;
-				}
-			}while(!korektaVertiba);
+			int izv1 = izvele[0], izv2 = izvele[1];
 			
 			MatricasObjekts matrica = new MatricasObjekts();
-			matrica.vertibas = matrica.Saskaitit(matricas.get(izv1).vertibas, matricas.get(izv1).rindas, matricas.get(izv1).kolonnas, matricas.get(izv2).vertibas, matricas.get(izv2).rindas, matricas.get(izv2).kolonnas);
+			matrica.vertibas = matrica.Atnemt(matricas.get(izv1).vertibas, matricas.get(izv1).rindas, matricas.get(izv1).kolonnas, matricas.get(izv2).vertibas, matricas.get(izv2).rindas, matricas.get(izv2).kolonnas);
 			matrica.kolonnas = matricas.get(izv1).rindas;
 			matrica.rindas = matricas.get(izv1).kolonnas;
 			

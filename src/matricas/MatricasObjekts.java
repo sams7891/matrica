@@ -43,6 +43,8 @@ public class MatricasObjekts {
 
 	    return matrica;
 	}
+	
+	
 
 	
 	String nolasit(double[][] matrica, int r, int k) {
