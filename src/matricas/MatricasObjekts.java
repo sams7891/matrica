@@ -11,4 +11,6 @@ public class MatricasObjekts {
 		this.vertibas = vertibas;
 	}
 	
+	
+	
 }
