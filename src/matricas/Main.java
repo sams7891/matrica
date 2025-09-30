@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 public class Main {
 
 	public static void main(String[] args) {
-		String[] opcijas = {"Izveidot matricu", "Apskatit matricas", "saskaitīt matricu"};
+		String[] opcijas = {"Izveidot matricu", "Apskatit matricas", "Saskaitīt matricu", "Atņemt matricu"};
 		String izv;
 		
 		do {
@@ -23,8 +23,12 @@ public class Main {
 				Matricas.apskatitMatricas();
 				break;
 				
-			case "saskaitīt matricu":
-				Matricas.apskatitMatricas();
+			case "Saskaitīt matricu":
+				Matricas.saskaititMatricas();
+				break;
+				
+			case "Atņemt matricu":
+				Matricas.atnemtMatricas();
 				break;
 			}
 			

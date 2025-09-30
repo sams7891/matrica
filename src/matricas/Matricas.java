@@ -117,25 +117,107 @@ public class Matricas {
 		
 		teksts = "";
 		
-		for(int i = 0; i < matricas.get(izv).rindas; i++) {
-			for(int j = 0; j < matricas.get(izv).kolonnas; j++) {
-				teksts += matricas.get(izv).vertibas[i][j];
-				
-				if(matricas.get(izv).vertibas[i][j] >= 0)
-					teksts += " ";
-				
-				if(matricas.get(izv).vertibas[i][j] < 10) {
-					teksts += "   ";
-				} else if(matricas.get(izv).vertibas[i][j] < 100) {
-					teksts += "  ";
-				}else {
-					teksts += " ";
-				}
-			}
-			teksts += "\n";
-		}
+		teksts = matricas.get(izv).nolasit(matricas.get(izv).vertibas, matricas.get(izv).rindas, matricas.get(izv).kolonnas);
+		
 		
 		JOptionPane.showMessageDialog(null, teksts, "Matrica", JOptionPane.PLAIN_MESSAGE);
 	}
 			
+	public static void saskaititMatricas() {
+		
+		String teksts = "", pagVert;
+		boolean korektaVertiba;
+		int izv1 = 0, izv2 = 0;
+		
+		for(int i = 0; i < matricas.size(); i++) {
+			teksts += ( i + 1 ) + " - Matrica ar rindu un kolonnu skaitu: " + matricas.get(i).rindas + "; " + matricas.get(i).kolonnas + "\n";
+		}
+		
+		do {
+			try {
+				pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
+				
+				if(pagVert == null)
+					return;
+				
+				izv1 = Integer.parseInt(pagVert) - 1;
+				korektaVertiba = true;
+			}catch(NumberFormatException e) {
+				korektaVertiba = false;
+			}
+		}while(!korektaVertiba);
+		
+		do {
+			try {
+				pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
+				
+				izv2 = Integer.parseInt(pagVert) - 1;
+				korektaVertiba = true;
+			}catch(NumberFormatException e) {
+				korektaVertiba = false;
+			}
+		}while(!korektaVertiba);
+		
+		MatricasObjekts matrica = new MatricasObjekts();
+		matrica.vertibas = matrica.Saskaitit(matricas.get(izv1).vertibas, matricas.get(izv1).rindas, matricas.get(izv1).kolonnas, matricas.get(izv2).vertibas, matricas.get(izv2).rindas, matricas.get(izv2).kolonnas);
+		matrica.kolonnas = matricas.get(izv1).rindas;
+		matrica.rindas = matricas.get(izv1).kolonnas;
+		
+		if(matrica.vertibas != null) {
+			JOptionPane.showMessageDialog(null, matrica.nolasit(matrica.vertibas, matrica.rindas, matrica.kolonnas));
+			matricas.add(matrica);
+		} else {
+			JOptionPane.showMessageDialog(null, "Nevarēja saskaitīt matricu", "Nav iespējams", JOptionPane.WARNING_MESSAGE);
+		}
+			
+	}
+	
+		public static void atnemtMatricas() {
+			
+			String teksts = "", pagVert;
+			boolean korektaVertiba;
+			int izv1 = 0, izv2 = 0;
+			
+			for(int i = 0; i < matricas.size(); i++) {
+				teksts += ( i + 1 ) + " - Matrica ar rindu un kolonnu skaitu: " + matricas.get(i).rindas + "; " + matricas.get(i).kolonnas + "\n";
+			}
+			
+			do {
+				try {
+					pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
+					
+					if(pagVert == null)
+						return;
+					
+					izv1 = Integer.parseInt(pagVert) - 1;
+					korektaVertiba = true;
+				}catch(NumberFormatException e) {
+					korektaVertiba = false;
+				}
+			}while(!korektaVertiba);
+			
+			do {
+				try {
+					pagVert = JOptionPane.showInputDialog(null, "Kuru matricu apskatīsi\n" + teksts, "Jautājums", JOptionPane.QUESTION_MESSAGE);
+					
+					izv2 = Integer.parseInt(pagVert) - 1;
+					korektaVertiba = true;
+				}catch(NumberFormatException e) {
+					korektaVertiba = false;
+				}
+			}while(!korektaVertiba);
+			
+			MatricasObjekts matrica = new MatricasObjekts();
+			matrica.vertibas = matrica.Saskaitit(matricas.get(izv1).vertibas, matricas.get(izv1).rindas, matricas.get(izv1).kolonnas, matricas.get(izv2).vertibas, matricas.get(izv2).rindas, matricas.get(izv2).kolonnas);
+			matrica.kolonnas = matricas.get(izv1).rindas;
+			matrica.rindas = matricas.get(izv1).kolonnas;
+			
+			if(matrica.vertibas != null) {
+				JOptionPane.showMessageDialog(null, matrica.nolasit(matrica.vertibas, matrica.rindas, matrica.kolonnas));
+				matricas.add(matrica);
+			} else {
+				JOptionPane.showMessageDialog(null, "Nevarēja saskaitīt matricu", "Nav iespējams", JOptionPane.WARNING_MESSAGE);
+			}
+		
+	}
 }
